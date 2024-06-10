@@ -21,7 +21,7 @@ import codecs
 app = Flask(__name__)
 
 app.debug = True #Change this to False for production
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #Remove once done debugging
+#os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #Remove once done debugging
 
 app.config['MONGO_URI'] = os.environ['MONGO_URI']
 
