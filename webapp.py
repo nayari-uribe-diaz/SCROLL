@@ -279,14 +279,23 @@ def renderAccountPage():
 def renderAccountCreation():
     gitHubID = session['user_data']['login']
     Name=request.form['name']
+    Race=request.form['race']
     Class=request.form['class']
-    Level=request.form['level']
+
+    Strength=request.form['strength']
+    Dexterity=request.form['dexterity']
+    Constitution=request.form['constitution']
+    Intelligence=request.form['intelligence']
+    Wisdom=request.form['wisdom']
+    Charisma=request.form['charisma']
+
+    Level=0
     isDM = False
     Party = None
         
-    characterData=createCharacterData(gitHubID, Name, Class, Level, isDM, Party)
+    characterData=createCharacterData(gitHubID, Name, Race, Class, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma ,Level, isDM, Party)
    
-    return render_template('account.html',character_data=characterData)
+    return render_template('account.html',character_data=characterData, current_party=None, is_DM=isDM)
 
 @app.route('/createParty', methods=['GET', 'POST'])
 def renderCreateParty(): 
@@ -442,17 +451,25 @@ def renderUpdateCharacter():
     
     return redirect('/Account')
 
-def createCharacterData(gitHubID, Name, Class, Level, isDM, Party):
+def createCharacterData(gitHubID, Name, Race, Class, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma ,Level, isDM, Party):
     doc = {
         "GitHubID": gitHubID,
         "Name": Name,
+        "Race": Race,
         "Class": Class,
+        "Strength": Strength,
+        "Dexterity": Dexterity,
+        "Constitution": Constitution,
+        "Intelligence": Intelligence,
+        "Wisdom": Wisdom,
+        "Charisma": Charisma,
         "Level": Level,
         "DMaster": isDM,
         "CurrentParty": Party
     }
     characters.insert_one(doc)
     characterData = doc
+    print("CREATED A CHARACTER!!!")
     return(characterData)
     
 def loadCharacterData(gitHubID):

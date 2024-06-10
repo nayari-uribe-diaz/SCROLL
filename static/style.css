@@ -75,15 +75,8 @@ body{
 	font-size: 20px;
 }
 
-
-h5{
-	font-size:50px;
-}
-
 p{
-	font-size:50px;
-	background-color: #D9D9D9;
-	border-radius: 5px;
+	font-size:25px;
 }
 
 .accent1{
@@ -141,6 +134,8 @@ input {
 
 ul {
   list-style-type: none;
+  padding: 0px;
+  margin: 0px;
 }
 
 li{
@@ -172,9 +167,13 @@ li{
 	
 }
 
-.marginAccount {
+#marginAccountLeft {
 	margin-bottom: 40px;
 	margin-right: 20px;
+}
+
+#marginAccountRight {
+	margin-bottom: 40px;
 }
 
 @media (min-width: 1400px) {
