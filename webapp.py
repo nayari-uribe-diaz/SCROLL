@@ -98,7 +98,7 @@ def home():
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
 def login():
-    
+    #Change to http for local
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
 
 @app.route('/logout')
@@ -149,7 +149,7 @@ def renderPage2():
         message = 'Please Log in.'
         return render_template('message.html', message=message)
     
-def getMessages(current_Party):
+"""def getMessages(current_Party):
     message = ""
     
     for doc in messages.find({"PartyTag": current_Party}):
@@ -195,7 +195,7 @@ def on_join(data):
     join_room(room)
     #send(username + ' has entered the room.', to=room)
     #print("Joined Room")
-  
+""" 
 @app.route('/Summary',methods=['GET','POST'])
 def renderSummaryPage():
     if 'user_data' in session:
