@@ -28,7 +28,7 @@ app.config['MONGO_URI'] = os.environ['MONGO_URI']
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 oauth.init_app(app) #initialize the app to be able to make requests for user information
-#socketio = SocketIO(app)
+socketio = SocketIO(app)
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
@@ -149,7 +149,7 @@ def renderPage2():
         message = 'Please Log in.'
         return render_template('message.html', message=message)
     
-"""def getMessages(current_Party):
+def getMessages(current_Party):
     message = ""
     
     for doc in messages.find({"PartyTag": current_Party}):
@@ -195,7 +195,7 @@ def on_join(data):
     join_room(room)
     #send(username + ' has entered the room.', to=room)
     #print("Joined Room")
-""" 
+    
 @app.route('/Summary',methods=['GET','POST'])
 def renderSummaryPage():
     if 'user_data' in session:
