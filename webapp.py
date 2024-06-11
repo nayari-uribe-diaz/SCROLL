@@ -193,7 +193,17 @@ def on_join(data):
     username = session['user_data']['login']
     room = loadCharacterData(username)["CurrentParty"]
     join_room(room)
-    #send(username + ' has entered the room.', to=room)
+    print("Joined Room" + room)
+    send(username + ' has entered the room.', to=room)
+    #print("Joined Room")
+    
+@socketio.on('leave')
+def on_leave(data):
+    username = session['user_data']['login']
+    room = loadCharacterData(username)["CurrentParty"]
+    leave_room(room)
+    print("Left Room" + room)
+    send(username + ' has entered the room.', to=room)
     #print("Joined Room")
     
 @app.route('/Summary',methods=['GET','POST'])
