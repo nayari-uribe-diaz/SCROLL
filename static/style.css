@@ -1,4 +1,11 @@
 /* Space 1*/
+.BGImage{
+  background-image: url(images/BG1.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 
 #MapPan{
 	border: 2px dashed #696868;

@@ -4,6 +4,8 @@
 
 {% block title %}Home{% endblock %}
 
+{% block bodyClass %} class="BGImage" {% endblock %}
+
 {% block content %}
 {% if user_Data != None %}
 	{% if current_party != None%}
@@ -26,6 +28,10 @@
 		</div>
 	{%endif%}
 {%else%}
-	<h1 class="background">Welcome! NOT MESSAGE REDIRECT</h1>
+<div class="row">
+	<div class="col">
+		<h1>Welcome! NOT MESSAGE REDIRECT</h1>
+	</div>
+</row>
 {%endif%}
 {% endblock %}
