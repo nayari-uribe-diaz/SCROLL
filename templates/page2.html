@@ -20,16 +20,14 @@
 			socket.emit('join', {});
 		});
 		
-		socket.on('disconnect' function() {
+		socket.on('disconnect', function() {
 			socket.emit('leave', {});
 		});
 		
 		 socket.on('message', function(data) {
 			$('#list').append("<li>" + data + "</li>");
+         });
     });
-	
-
-});
 </script>
 
 <form action={{ url_for("submitMessage") }} method="POST" class="ms-4 input">
