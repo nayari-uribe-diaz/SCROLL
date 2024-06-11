@@ -19,8 +19,13 @@
 		socket.on('connect', function() {
 			socket.emit('join', {});
 		});
-	 socket.on('message', function(data) {
-        $('#list').append("<li>" + data + "</li>");
+		
+		socket.on('disconnect' function() {
+			socket.emit('leave', {});
+		});
+		
+		 socket.on('message', function(data) {
+			$('#list').append("<li>" + data + "</li>");
     });
 	
 
