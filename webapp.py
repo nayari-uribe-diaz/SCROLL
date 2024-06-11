@@ -203,7 +203,7 @@ def on_leave(data):
     room = loadCharacterData(username)["CurrentParty"]
     leave_room(room)
     print("Left Room" + room)
-    send(username + ' has entered the room.', to=room)
+    send(username + ' has left the room.', to=room)
     #print("Joined Room")
     
 @app.route('/Summary',methods=['GET','POST'])
