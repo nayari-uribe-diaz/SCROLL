@@ -188,7 +188,10 @@ li{
 		max-width: 100%;
 	}
 }
-    
+
+.center{
+	justify-content: center;
+}
 
 
 /*End of Space 2*/
