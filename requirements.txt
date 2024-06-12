@@ -10,5 +10,4 @@ Flask-PyMongo
 pymongo>=4.0
 Flask_APScheduler
 flask_socketio
-eventlet==0.30.2
 gevent
