@@ -1,3 +1,5 @@
+from gevent import monkey
+monkey.patch_all() 
 from flask import Flask, redirect, url_for, session, request, jsonify, render_template, flash, Response
 from markupsafe import Markup
 from flask_apscheduler import APScheduler
@@ -7,7 +9,7 @@ from bson.objectid import ObjectId
 from flask_socketio import SocketIO, send, emit, join_room, leave_room
 from bson.objectid import ObjectId
 from flask_pymongo import PyMongo
-from gevent import monkey
+
 
 #TODO Check why log out check is not working and why submitting when logged out on summary adds a message
 
@@ -21,7 +23,7 @@ import datetime
 import codecs
 
 
-monkey.patch_all() 
+
 app = Flask(__name__)
 
 app.debug = True #Change this to False for production
