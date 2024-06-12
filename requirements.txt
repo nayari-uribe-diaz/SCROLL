@@ -4,10 +4,11 @@ Jinja2
 MarkupSafe
 Werkzeug>=2.2,<3.0
 wheel
-gunicorn==20.1.0
+gunicorn
 Flask-OAuthlib
 Flask-PyMongo
 pymongo>=4.0
 Flask_APScheduler
 flask_socketio
 eventlet==0.30.2
+gevent
