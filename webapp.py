@@ -188,23 +188,25 @@ def remove_old_messages(partyTag):
     if numberofmessages > 5:
         messages.delete_one({"PartyTag": partyTag})
   
-@socketio.on('join')
-def on_join(data):
-    username = session['user_data']['login']
-    room = loadCharacterData(username)["CurrentParty"]
-    join_room(room)
-    print("Joined Room" + room)
-    send(username + ' has entered the room.', to=room)
-    #print("Joined Room")
-    
-@socketio.on('leave')
-def on_leave(data):
-    username = session['user_data']['login']
-    room = loadCharacterData(username)["CurrentParty"]
-    leave_room(room)
-    print("Left Room" + room)
-    send(username + ' has left the room.', to=room)
-    #print("Joined Room")
+users = {}
+
+@socketio.on("connect")
+def handle_connect():
+    print("Client connected!")
+
+@socketio.on("user_join")
+def handle_user_join(username):
+    print(f"User {username} joined!")
+    users[username] = request.sid
+
+@socketio.on("new_message")
+def handle_new_message(message):
+    print(f"New message: {message}")
+    username = None 
+    for user in users:
+        if users[user] == request.sid:
+            username = user
+    emit("chat", {"message": message, "username": username}, broadcast=True)
     
 @app.route('/Summary',methods=['GET','POST'])
 def renderSummaryPage():
@@ -565,4 +567,4 @@ def uploadImage(image, imageName, partyTag):
         imagesFS.put(image, filename=imageName, party=partyTag)
 #https://www.youtube.com/watch?v=6WruncSoCdI
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app,port=3000)
