@@ -7,6 +7,8 @@ from bson.objectid import ObjectId
 from flask_socketio import SocketIO, send, emit, join_room, leave_room
 from bson.objectid import ObjectId
 from flask_pymongo import PyMongo
+from gevent import monkey
+
 #TODO Check why log out check is not working and why submitting when logged out on summary adds a message
 
 import pprint
@@ -17,7 +19,9 @@ import gridfs
 import sys
 import datetime
 import codecs
- 
+
+
+monkey.patch_all() 
 app = Flask(__name__)
 
 app.debug = True #Change this to False for production
