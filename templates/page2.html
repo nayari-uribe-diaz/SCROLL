@@ -15,7 +15,13 @@
 
 	<script type="text/javascript" charset="utf-8">
 	$(document).ready(function(){
-		const socket = io({transports: ['websocket']});
+		const socket = io({
+			reconnection: true,
+			reconnectionDelay: 1000,
+			reconnectionDelayMax: 5000,
+			reconnectionAttempts: 3,
+			transports: ['websocket']
+		});
 		socket.on('connect', function() {
 			socket.emit('join', {});
 			console.log("JOINED SERVER");
