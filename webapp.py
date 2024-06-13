@@ -563,4 +563,4 @@ def uploadImage(image, imageName, partyTag):
         imagesFS.put(image, filename=imageName, party=partyTag)
 #https://www.youtube.com/watch?v=6WruncSoCdI
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, port=3000)
