@@ -44,7 +44,7 @@ app.config['MONGO_URI'] = os.environ['MONGO_URI']
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 oauth.init_app(app) #initialize the app to be able to make requests for user information
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode='gevent_uwsgi')
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
