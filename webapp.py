@@ -1,5 +1,14 @@
+import sys
+if 'threading' in sys.modules:
+    del sys.modules['threading']
+import gevent
+import gevent.socket
+import gevent.monkey
+gevent.monkey.patch_all()
+
 from gevent import monkey
 monkey.patch_all() 
+
 from flask import Flask, redirect, url_for, session, request, jsonify, render_template, flash, Response
 from markupsafe import Markup
 from flask_apscheduler import APScheduler
@@ -18,9 +27,10 @@ import os
 import time
 import pymongo
 import gridfs
-import sys
 import datetime
 import codecs
+
+
 
 
 
