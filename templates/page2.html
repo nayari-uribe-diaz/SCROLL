@@ -15,17 +15,20 @@
 
 	<script type="text/javascript" charset="utf-8">
 	$(document).ready(function(){
-		const socket = io();
+		const socket = io({transports: ['websocket']});
 		socket.on('connect', function() {
 			socket.emit('join', {});
+			console.log("JOINED SERVER");
 		});
 		
 		socket.on('disconnect', function() {
 			socket.emit('leave', {});
+			console.log("LEFT SERVER");
 		});
 		
 		 socket.on('message', function(data) {
 			$('#list').append("<li>" + data + "</li>");
+			console.log("NEW MESSAGE");
          });
     });
 </script>
