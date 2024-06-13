@@ -44,7 +44,7 @@ app.config['MONGO_URI'] = os.environ['MONGO_URI']
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 oauth.init_app(app) #initialize the app to be able to make requests for user information
-socketio = SocketIO(app, async_mode='gevent_uwsgi')
+socketio = SocketIO(app)
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
@@ -563,4 +563,4 @@ def uploadImage(image, imageName, partyTag):
         imagesFS.put(image, filename=imageName, party=partyTag)
 #https://www.youtube.com/watch?v=6WruncSoCdI
 if __name__ == '__main__':
-    socketio.run(app,port=3000)
+    socketio.run(app)
