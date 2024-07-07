@@ -13,22 +13,31 @@
  </ul>
 
 
-	<script type="text/javascript" charset="utf-8">
+	<!--<script type="text/javascript" charset="utf-8">
 	$(document).ready(function(){
-		const socket = io();
+		const socket = io({
+			reconnection: true,
+			reconnectionDelay: 1000,
+			reconnectionDelayMax: 5000,
+			reconnectionAttempts: 3,
+			transports: ['websocket']
+		});
 		socket.on('connect', function() {
 			socket.emit('join', {});
+			console.log("JOINED SERVER");
 		});
 		
 		socket.on('disconnect', function() {
 			socket.emit('leave', {});
+			console.log("LEFT SERVER");
 		});
 		
 		 socket.on('message', function(data) {
 			$('#list').append("<li>" + data + "</li>");
+			console.log("NEW MESSAGE");
          });
     });
-</script>
+</script> -->
 
 <form action={{ url_for("submitMessage") }} method="POST" class="ms-4 input">
   <input type="text" name="messageBody" id="mes">

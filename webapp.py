@@ -1,3 +1,14 @@
+import sys
+if 'threading' in sys.modules:
+    del sys.modules['threading']
+import gevent
+import gevent.socket
+import gevent.monkey
+gevent.monkey.patch_all()
+
+from gevent import monkey
+monkey.patch_all() 
+
 from flask import Flask, redirect, url_for, session, request, jsonify, render_template, flash, Response
 from markupsafe import Markup
 from flask_apscheduler import APScheduler
@@ -7,6 +18,8 @@ from bson.objectid import ObjectId
 from flask_socketio import SocketIO, send, emit, join_room, leave_room
 from bson.objectid import ObjectId
 from flask_pymongo import PyMongo
+
+
 #TODO Check why log out check is not working and why submitting when logged out on summary adds a message
 
 import pprint
@@ -14,10 +27,13 @@ import os
 import time
 import pymongo
 import gridfs
-import sys
 import datetime
 import codecs
- 
+
+
+
+
+
 app = Flask(__name__)
 
 app.debug = True #Change this to False for production
@@ -187,24 +203,6 @@ def remove_old_messages(partyTag):
         numberofmessages += 1
     if numberofmessages > 5:
         messages.delete_one({"PartyTag": partyTag})
-  
-@socketio.on('join')
-def on_join(data):
-    username = session['user_data']['login']
-    room = loadCharacterData(username)["CurrentParty"]
-    join_room(room)
-    print("Joined Room" + room)
-    send(username + ' has entered the room.', to=room)
-    #print("Joined Room")
-    
-@socketio.on('leave')
-def on_leave(data):
-    username = session['user_data']['login']
-    room = loadCharacterData(username)["CurrentParty"]
-    leave_room(room)
-    print("Left Room" + room)
-    send(username + ' has left the room.', to=room)
-    #print("Joined Room")
     
 @app.route('/Summary',methods=['GET','POST'])
 def renderSummaryPage():
@@ -565,4 +563,4 @@ def uploadImage(image, imageName, partyTag):
         imagesFS.put(image, filename=imageName, party=partyTag)
 #https://www.youtube.com/watch?v=6WruncSoCdI
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, port=3000)

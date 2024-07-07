@@ -10,3 +10,5 @@ Flask-PyMongo
 pymongo>=4.0
 Flask_APScheduler
 flask_socketio
+gevent
+gevent-websocket
