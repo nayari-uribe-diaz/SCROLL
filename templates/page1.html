@@ -14,7 +14,16 @@
 		<div class="background">
 			<p>Party Location:</p>
 			<p>Party Items </p>
+
+			{% if is_dm == True %}
+			<form action={{ url_for("renderCampaignInputPage") }} method="POST" class="ms-4 input">
+				<input type="submit" class="submit" value="Submit">
+			</form>
+			{%endif%}
 		</div>
+
+
+
 		{% if is_dm == True %}
 		<div class="background">
 			<form action={{ url_for("uploadMap") }} method="POST" enctype="multipart/form-data">
@@ -28,6 +37,7 @@
 								<button type="submit" class="btn btn-primary">Upload</button>
 							</div>
 						</label>
+					</form>
 			</form>
 				{% endif %}
 		</div>

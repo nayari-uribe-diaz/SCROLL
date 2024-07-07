@@ -37,7 +37,7 @@ import codecs
 app = Flask(__name__)
 
 app.debug = True #Change this to False for production
-#os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #Remove once done debugging
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #Remove once done debugging
 
 app.config['MONGO_URI'] = os.environ['MONGO_URI']
 
@@ -115,7 +115,7 @@ def home():
 @app.route('/login')
 def login():
     #Change to http for local
-    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
+    return github.authorize(callback=url_for('authorized', _external=True, _scheme='http')) #callback URL must match the pre-configured callback URL
 
 @app.route('/logout')
 def logout():
@@ -512,6 +512,21 @@ def renderPage1():
        return render_template('message.html', message=message)
 
 
+@app.route('/PartyInput',methods=['GET','POST'])
+def renderCampaignInputPage():
+
+    return render_template('CampaignInput.html')
+
+@app.route('/Submit',methods=['GET','POST'])
+def submitCampaignInput():
+    sumInput = request.form['bodyInput']
+    headInput = request.form['headInput']
+    gitHubID = session['user_data']['login']
+    PartyTag = loadCharacterData(gitHubID)["CurrentParty"]
+    updateSummary(headInput, sumInput, PartyTag)
+    return redirect('/page1')
+
+
 @app.route('/uploadMapImage', methods=['GET', 'POST'])
 def uploadMap():  
     if request.method == 'POST':
@@ -563,4 +578,4 @@ def uploadImage(image, imageName, partyTag):
         imagesFS.put(image, filename=imageName, party=partyTag)
 #https://www.youtube.com/watch?v=6WruncSoCdI
 if __name__ == '__main__':
-    socketio.run(app, port=3000)
+    socketio.run(app, port=5000)
